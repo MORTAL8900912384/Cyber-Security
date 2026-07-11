@@ -1,0 +1,41 @@
+# External Reconnaissance & Enumeration Report
+
+Academic coursework project demonstrating a structured, passive-to-active external
+reconnaissance methodology against a single target host, selected via Shodan.
+
+> ⚠️ **Scope & Ethics Note:** This assessment was performed as part of a university
+> cybersecurity coursework assignment. All testing was limited to a single,
+> publicly Shodan-indexed host, used non-intrusive/read-only techniques only
+> (no exploitation, brute-force login, or denial-of-service activity), and was
+> scoped strictly to the target host itself — explicitly excluding the parent
+> domain and any other sites on shared hosting infrastructure.
+
+## Methodology
+
+1. **Target Profiling** — WHOIS and Netcraft for registrar, nameserver, and hosting context
+2. **Subdomain Enumeration** — Subfinder + manual DNS checks, scoped to the target host
+3. **Service Enumeration** — Nmap (port/service/version detection, NSE scripting for HTTP, TLS, SSH)
+4. **Web Enumeration** — Gobuster directory/file discovery
+5. **Intelligence Gathering** — Shodan for externally-indexed services and technologies
+
+## Tools Used
+
+`Nmap` · `Gobuster` · `Subfinder` · `WHOIS` · `Netcraft` · `Shodan` · `dig` / `host`
+
+## Key Findings
+
+- 3 open ports identified: SSH (22), HTTP (80), HTTPS (443)
+- Both web ports fronted by Cloudflare, serving a JS bot-challenge to automated clients
+- One backend endpoint (`/addtocart.php`) discovered via Gobuster, indicating e-commerce functionality
+- No subdomains discovered beyond the target host itself
+- Full findings, risk analysis, and remediation recommendations in [`recon_report.pdf`](./recon_report.pdf)
+
+## Report
+
+📄 [Full Report (PDF)](./recon_report.pdf)
+
+## Disclaimer
+
+This project is for educational purposes only, conducted under coursework
+authorization. Do not use these techniques against systems you do not own or
+have explicit written permission to test.
